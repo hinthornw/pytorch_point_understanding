@@ -94,7 +94,7 @@ class PascalVOCSegmentation(data.Dataset):
         with each semantic part in the dataset. This is used for defining the
         output dimensions of the network.
         '''
-        assert isinstance(dict, network_dims), 'Unable to pass on network' \
+        assert isinstance(network_dims, dict), 'Unable to pass on network' \
             'directions iwth network_dims dict'
         assert mask_type in _MASKTYPE, "mask_type {} error. Must be one of {}".format(
             mask_type, list(_MASKTYPE))

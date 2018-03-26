@@ -42,9 +42,9 @@ def get_pascal_object_part_points(points_root, fname):
     '''
     # fname = "pascal_gt.json"
     with open(os.path.join(points_root, fname), 'r') as f:
-        txt = f.readline().strip()
-        parts_per_class = json.loads(txt)
-        data = json.load(f)
+        # txt = f.readline().strip()
+        parts_per_class = json.loads(f.readline().strip())
+        data = json.loads(f.readline().strip())
     return data, parts_per_class
 
 

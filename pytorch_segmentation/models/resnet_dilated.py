@@ -18,7 +18,6 @@ class Resnet34_8s(nn.Module):
             pretrained=True):
 
         super(Resnet34_8s, self).__init__()
-
         assert isinstance(output_dims, dict)
         assert len(output_dims) != 0
         assert len(output_dims) == 20
@@ -27,8 +26,10 @@ class Resnet34_8s(nn.Module):
             layer.weight.data.normal_(0, 0.01)
             layer.bias.data.zero_()
 
-        # one dimension for each object and part
-        num_classes = sum([1 + output_dims[k] for k in output_dims])
+        # one dimension for each object and part (plus background)
+        # TODO: in order to train on other datasets, will need to
+        # push the bg class to the point file
+        num_classes = 1 + sum([1 + output_dims[k] for k in output_dims])
 
         # Load the pretrained weights, remove avg pool
         # layer and get the output stride of 8
@@ -49,6 +50,7 @@ class Resnet34_8s(nn.Module):
         self.output_dims = output_dims
         self.split_tensor = [1, len(self.output_dims)]
         self.split_tensor.extend([v for v in self.output_dims.values()])
+        print(self.split_tensor)
 
     def forward(self, x):
 
@@ -66,7 +68,6 @@ class Resnet34_8s(nn.Module):
             parts = [torch.sum(part, dim=1, keepdim=True) for part in parts]
             parts = torch.cat(parts, dim=1)
             out = objects + parts
-            out = None
             out = torch.cat([bg, out], dim=1)
             # x = [background, obj_1, obj_2, ..., parts_1, parts_2, ...]
             # out = [background, obj_or_part_1, obj_or_part_2, , ...]

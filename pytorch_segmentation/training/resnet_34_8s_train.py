@@ -134,7 +134,7 @@ def main(args):
     print("=> Creating network and optimizer")
     train_params = {}
     net, optimizer = get_network_and_optimizer(
-        number_of_classes,
+        network_dims,
         load_from_local, model_path, train_params)
     # net, optimizer = get_network_and_optimizer(number_of_classes,
     # to_aggregate, load_from_local, model_path, train_params)
