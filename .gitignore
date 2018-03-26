@@ -1,0 +1,15 @@
+.ipynb_checkpoints
+*.pyc
+*.pth
+Untitled.ipynb
+*.swp
+*.jpg
+*.png
+*.mat
+*.tar
+*.gzp
+*.xml
+*.cc
+*.txt
+.DS_Store
+datasets/*
