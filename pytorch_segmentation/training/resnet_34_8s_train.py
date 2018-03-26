@@ -11,7 +11,20 @@ import tensorboardX
 import numpy as np
 from sklearn.metrics import confusion_matrix
 
-from .. import (poly_lr_scheduler,
+# Allow for access to the modified torchvision library and
+# various datasets
+path = os.path.dirname(os.path.realpath(__file__))
+patharr = path.split(os.sep)
+home_dir = os.path.join(
+    '/', *patharr[:patharr.index('obj_part_segmentation') + 1])
+# vision_dir = os.path.join(home_dir, 'vision')
+dataset_dir = os.path.join(home_dir, 'datasets')
+sys.path.insert(0, home_dir)
+# sys.path.insert(0, vision_dir)
+# import obj_part_segmentation
+import pytorch_segmentation
+from pytorch_segmentation.evaluation import (
+                poly_lr_scheduler,
                 get_training_loaders,
                 get_valid_logits,
                 get_valid_annos,
@@ -24,16 +37,7 @@ from .. import (poly_lr_scheduler,
                 validate_and_output_images,
                 get_network_and_optimizer)
 
-# Allow for access to the modified torchvision library and
-# various datasets
-path = os.path.dirname(os.path.realpath(__file__))
-patharr = path.split(os.sep)
-home_dir = os.path.join(
-    '/', *patharr[:patharr.index('object_part_segmentation') + 1])
-vision_dir = os.path.join(home_dir, 'vision')
-dataset_dir = os.path.join(home_dir, 'datasets')
-sys.path.insert(0, home_dir)
-sys.path.insert(0, vision_dir)
+
 
 # pylint: disable=fixme
 

@@ -24,11 +24,11 @@ from .transforms import (ComposeJoint,
 path = os.path.dirname(os.path.realpath(__file__))
 patharr = path.split(os.sep)
 home_dir = os.path.join(
-    '/', *patharr[:patharr.index('object_part_segmentation') + 1])
-vision_dir = os.path.join(home_dir, 'vision')
+    '/', *patharr[:patharr.index('obj_part_segmentation') + 1])
+# vision_dir = os.path.join(home_dir, 'vision')
 dataset_dir = os.path.join(home_dir, 'datasets')
 sys.path.insert(0, home_dir)
-sys.path.insert(0, vision_dir)
+# sys.path.insert(0, vision_dir)
 
 
 def poly_lr_scheduler(optimizer, init_lr, iteration, lr_decay_iter=1,
