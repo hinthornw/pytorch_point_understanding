@@ -101,6 +101,7 @@ class PascalVOCSegmentation(data.Dataset):
 
         assert which in ['binary', 'merged', 'sparse']
         self.PASCAL_POINT_FILE_NAME = which + "_" + self.PASCAL_POINT_FILE_NAME
+        print("Collecting points from : {}".format(self.PASCAL_POINT_FILE_NAME))
 
         self.mask_type = _MASKTYPE[mask_type]
         self.root = root
@@ -161,6 +162,8 @@ class PascalVOCSegmentation(data.Dataset):
             point_annotations,
             self.mask_type,
             np.array(_semantic_target).shape)
+
+        _point_target = Image.fromarray(_point_target)
 
         if self.joint_transform is not None:
             _img, _semantic_target, _point_target = self.joint_transform(

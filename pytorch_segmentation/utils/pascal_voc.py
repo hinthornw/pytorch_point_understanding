@@ -1,4 +1,5 @@
-
+# pylint: disable-all
+# flake8: noqa
 # TODO: Some folder settings were changed compared to the original
 # repository -- need to change the realtive paths for pascal voc here
 # More specifically, the folder that is created after untarring the pascal

@@ -38,12 +38,10 @@ class Resnet34_8s(nn.Module):
                                output_stride=8,
                                remove_avg_pool_layer=True)
 
-        self.resnet34_8s = resnet34_8s
-
         # Randomly initialize the 1x1 Conv scoring layer
         resnet34_8s.fc = nn.Conv2d(resnet34_8s.inplanes, num_classes, 1)
 
-
+        self.resnet34_8s = resnet34_8s
 
         _normal_initialization(self.resnet34_8s.fc)
         self.part_task = part_task
